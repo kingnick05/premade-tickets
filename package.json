@@ -1,0 +1,34 @@
+{
+  "name": "premade-tickets",
+  "version": "1.0.0",
+  "description": "A simple, customizable ticket bot.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kingnick05/premade-tickets.git"
+  },
+  "keywords": [
+    "bot",
+    "discord",
+    "discord",
+    "bot",
+    "ticket",
+    "bot",
+    "ticket",
+    "tickets"
+  ],
+  "author": "kingnick05",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kingnick05/premade-tickets/issues"
+  },
+  "homepage": "https://github.com/kingnick05/premade-tickets#readme",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "discord.js": "^12.2.0",
+    "fs": "0.0.1-security"
+  }
+}
