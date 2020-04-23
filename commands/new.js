@@ -5,7 +5,7 @@ const chalk = require("chalk");
 exports.run = async (bot, message, args) => {
 
     const tC = message.guild.channels.cache.find(c => c.name === 'Tickets' && c.type === "category");
-    const modeRole = message.guild.roles.cache.find(r => r.name === config.ticketRole);
+    const tickets = message.guild.roles.cache.find(r => r.name === "Tickets");
     let noC = new Discord.MessageEmbed()
         .setTitle(config.errT)
         .setColor(config.errC)
@@ -25,10 +25,10 @@ exports.run = async (bot, message, args) => {
             },
             {
                 id: message.author.id,
-                allow: ['VIEW CHANNEL'],
+                allow: ['VIEW_CHANNEL'],
             },
             {
-                id:  modeRole.id,
+                id:  tickets.id,
                 allow: ['VIEW_CHANNEL']
             }
         ]

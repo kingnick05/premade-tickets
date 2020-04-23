@@ -4,7 +4,7 @@ var chalk = require("chalk");
 
 exports.run = async (bot, message, args) => {
 
-    const modeRole = message.guild.roles.cache.find(r => r.name === config.ticketRole);
+    const tickets = message.guild.roles.cache.find(r => r.name === "Tickets");
     let user = message.author;
     let member = message.guild.member(user);
 
@@ -31,7 +31,7 @@ exports.run = async (bot, message, args) => {
     let bR = args.join(" ").slice(22);
     if(!bR) return message.channel.send(noR);
     
-    if(member.roles.cache.some(role => role.name === `${modeRole}`)) {
+    if(member.roles.cache.some(role => role.name === `Tickets`)) {
         message.delete().catch(O_o=>{});
         message.guild.member(b).ban(bR);
         message.channel.send(new Discord.MessageEmbed()

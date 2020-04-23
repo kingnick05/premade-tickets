@@ -67,8 +67,8 @@ bot.on("message", async message => {
                             max: 1,
                             time: 300000,
                         }).then((prefi) => {
-                            let prefix = prefi.first().content;
-                            if (prefix) {
+                            let prefiix = prefi.first().content;
+                            if (prefiix) {
 
                                 let q2 = new Discord.MessageEmbed()
                                     .setDescription("Identify the default color of embeds from this bot (In hex form. Ex: #332499")
@@ -138,81 +138,50 @@ bot.on("message", async message => {
                                                                                                     let errT = erT.first().content;
                                                                                                     if (errT) {
 
-                                                                                                        let q8 = new Discord.MessageEmbed()
-                                                                                                            .setDescription("Identify the name of the Mod Role/Role you'd like to see tickets (Without tagging, just name)")
+                                                                                                        const preFix = JSON.parse(fs.readFileSync(fileName, 'utf8'));
+                                                                                                        preFix.prefix = prefiix;
+                                                                                                        fs.writeFileSync(fileName, JSON.stringify(preFix));
 
-                                                                                                        channel.send(q8).then(async function (mR) {
-                                                                                                            channel.awaitMessages(response => message.content, {
-                                                                                                                max: 1,
-                                                                                                                time: 300000,
-                                                                                                            }).then((mdR) => {
-                                                                                                                let modRole = mdR.first().content;
-                                                                                                                if (modRole) {
+                                                                                                        const embedColor = JSON.parse(fs.readFileSync(fileName, 'utf8'));
+                                                                                                        embedColor.embC = embC;
+                                                                                                        fs.writeFileSync(fileName, JSON.stringify(embedColor));
 
-                                                                                                                    const preFix = JSON.parse(fs.readFileSync(fileName, 'utf8'));
-                                                                                                                    preFix.prefix = prefix;
-                                                                                                                    fs.writeFileSync(fileName, JSON.stringify(preFix));
+                                                                                                        const embedTitle = JSON.parse(fs.readFileSync(fileName, 'utf8'));
+                                                                                                        embedTitle.embT = embT;
+                                                                                                        fs.writeFileSync(fileName, JSON.stringify(embedTitle));
 
-                                                                                                                    const embedColor = JSON.parse(fs.readFileSync(fileName, 'utf8'));
-                                                                                                                    embedColor.embC = embC;
-                                                                                                                    fs.writeFileSync(fileName, JSON.stringify(embedColor));
+                                                                                                        const embedDescription = JSON.parse(fs.readFileSync(fileName, 'utf8'));
+                                                                                                        embedDescription.embDesc = embDesc;
+                                                                                                        fs.writeFileSync(fileName, JSON.stringify(embedDescription));
 
-                                                                                                                    const embedTitle = JSON.parse(fs.readFileSync(fileName, 'utf8'));
-                                                                                                                    embedTitle.embT = embT;
-                                                                                                                    fs.writeFileSync(fileName, JSON.stringify(embedTitle));
+                                                                                                        const embedFooter = JSON.parse(fs.readFileSync(fileName, 'utf8'));
+                                                                                                        embedFooter.embF = embF;
+                                                                                                        fs.writeFileSync(fileName, JSON.stringify(embedFooter));
 
-                                                                                                                    const embedDescription = JSON.parse(fs.readFileSync(fileName, 'utf8'));
-                                                                                                                    embedDescription.embDesc = embDesc;
-                                                                                                                    fs.writeFileSync(fileName, JSON.stringify(embedDescription));
+                                                                                                        const errorColor = JSON.parse(fs.readFileSync(fileName, 'utf8'));
+                                                                                                        errorColor.errC = errC;
+                                                                                                        fs.writeFileSync(fileName, JSON.stringify(errorColor));
 
-                                                                                                                    const embedFooter = JSON.parse(fs.readFileSync(fileName, 'utf8'));
-                                                                                                                    embedFooter.embF = embF;
-                                                                                                                    fs.writeFileSync(fileName, JSON.stringify(embedFooter));
+                                                                                                        const errorTitle = JSON.parse(fs.readFileSync(fileName, 'utf8'));
+                                                                                                        errorTitle.errT = errT;
+                                                                                                        fs.writeFileSync(fileName, JSON.stringify(errorTitle));
 
-                                                                                                                    const errorColor = JSON.parse(fs.readFileSync(fileName, 'utf8'));
-                                                                                                                    errorColor.errC = errC;
-                                                                                                                    fs.writeFileSync(fileName, JSON.stringify(errorColor));
+                                                                                                        const categoryT = message.guild.channels.cache.find(c => c.name === 'Tickets' && c.type === "category");
+                                                                                                        const tickets = message.guild.roles.cache.find(r => r.name === "Tickets");
 
-                                                                                                                    const errorTitle = JSON.parse(fs.readFileSync(fileName, 'utf8'));
-                                                                                                                    errorTitle.errT = errT;
-                                                                                                                    fs.writeFileSync(fileName, JSON.stringify(errorTitle));
+                                                                                                        if (!categoryT) {
+                                                                                                            message.guild.channels.create("Tickets", {
+                                                                                                                type: 'category',
+                                                                                                                permissionOverwrites: [{
+                                                                                                                    id: message.guild.id,
+                                                                                                                    deny: ['VIEW_CHANNEL'],
+                                                                                                                }]
+                                                                                                            }).then(c => c.setPosition(1))
+                                                                                                        }
 
-                                                                                                                    const moderatorRole = JSON.parse(fs.readFileSync(fileName, 'utf8'));
-                                                                                                                    moderatorRole.ticketRole = modRole;
-                                                                                                                    fs.writeFileSync(fileName, JSON.stringify(moderatorRole));
-
-                                                                                                                    const categoryT = message.guild.channels.cache.find(c => c.name === 'Tickets' && c.type === "category");
-                                                                                                                    const categoryA = message.guild.channels.cache.find(c => c.name === 'Archived Tickets' && c.type === "category");
-                                                                                                                    const modeRole = message.guild.roles.cache.find(r => r.name === config.ticketRole);
-
-                                                                                                                    if(!categoryT) {
-                                                                                                                        message.guild.channels.create("Tickets", {
-                                                                                                                            type: 'category',
-                                                                                                                            permissionOverwrites: [
-                                                                                                                                {
-                                                                                                                                    id: message.guild.id,
-                                                                                                                                    deny: ['VIEW_CHANNEL'],
-                                                                                                                                }
-                                                                                                                            ]
-                                                                                                                            }).then(c => c.setPosition(1))
-                                                                                                                    }
-
-                                                                                                                    if(!categoryA) {
-                                                                                                                        message.guild.channels.create("Archived Tickets", {
-                                                                                                                            type: 'category',
-                                                                                                                            permissionOverwrites: [
-                                                                                                                                {
-                                                                                                                                    id: message.guild.id,
-                                                                                                                                    deny: ['VIEW_CHANNEL'],
-                                                                                                                                }
-                                                                                                                            ]
-                                                                                                                        }).then(c => c.setPosition(0))
-                                                                                                                    }
-
-                                                                                                                    message.channel.bulkDelete(18)
-                                                                                                                    message.channel.send("The setup wizard is complete.")
-                                                                                                                }
-                                                                                                            })
+                                                                                                        message.channel.bulkDelete(16)
+                                                                                                        message.channel.send("The setup wizard is complete.").then(msg => {
+                                                                                                            msg.delete(5000)
                                                                                                         })
                                                                                                     }
                                                                                                 })
@@ -226,7 +195,6 @@ bot.on("message", async message => {
                                                                 }
                                                             })
                                                         })
-
                                                     }
                                                 })
                                             })
@@ -234,9 +202,13 @@ bot.on("message", async message => {
                                         }
                                     })
                                 })
+
                             }
                         })
                     })
+
+
+
 
 
                 }

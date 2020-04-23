@@ -26,8 +26,8 @@ exports.run = async (bot, message, args) => {
 
         message.channel.send(new Discord.MessageEmbed()
                 .setColor(config.embC)
-                .setDescription(`Successfully removed ${remove}`))
-            .setFooter(config.embF)
+                .setDescription(`Successfully removed ${remove}`)
+                .setFooter(config.embF))
 
     }
 

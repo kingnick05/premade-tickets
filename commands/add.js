@@ -26,8 +26,8 @@ exports.run = async (bot, message, args) => {
 
         message.channel.send(new Discord.MessageEmbed()
                 .setColor(config.embC)
-                .setDescription(`Successfully added ${add}`))
-            .setFooter(config.embF)
+                .setDescription(`Successfully added ${add}`)
+                .setFooter(config.embF))
 
     }
 

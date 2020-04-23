@@ -15,7 +15,7 @@ exports.run = async (bot, message, args) => {
 
 
     message.channel.send(new Discord.MessageEmbed()
-        .setDescription("This ticket close in 15 seconds.")
+        .setDescription("This ticket will close in 15 seconds.")
         .setColor(config.embC)
         .setFooter(config.embF)).then(setTimeout(() => message.channel.delete(), 15000));
 

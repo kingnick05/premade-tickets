@@ -4,7 +4,7 @@ var chalk = require("chalk");
 
 exports.run = async (bot, message, args) => {
 
-    const modeRole = message.guild.roles.cache.find(r => r.name === config.ticketRole);
+    const tickets = message.guild.roles.cache.find(r => r.name === "Tickets");
     let user = message.author;
     let member = message.guild.member(user);
 
@@ -23,7 +23,7 @@ exports.run = async (bot, message, args) => {
     let noR = new Discord.MessageEmbed()
     .setTitle(config.errT)
     .setColor(config.errC)
-    .setDescription("You must provide a reason for banning a user")
+    .setDescription("You must provide a reason for kicking a user")
     .setFooter(config.embF);
 
     const k = message.mentions.users.first();
@@ -31,9 +31,9 @@ exports.run = async (bot, message, args) => {
     let kR = args.join(" ").slice(22);
     if(!kR) return message.channel.send(noR);
     
-    if(member.roles.cache.some(role => role.name === `${modeRole}`)) {
+    if(member.roles.cache.some(role => role.name === `Tickets`)) {
         message.delete().catch(O_o=>{});
-        message.guild.member(k).ban(kR);
+        message.guild.member(k).kick(kR);
         message.channel.send(new Discord.MessageEmbed()
         .setTitle(config.embT)
         .setColor(config.embC)
