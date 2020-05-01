@@ -1,1 +1,10 @@
-{"token":"NjkxNjk0MzU5MTAzNjY4MjY2.Xp9MXQ.R71OenEBSmCB_uSnfhhhOcKdagg","prefix":"-","embC":"#332499","embT":"PartyWars Tickets","embDesc":"Test\nTest\nTest","embF":"Blue","errC":"#332499","errT":"Red"}
+{
+  "token":"BOT TOKEN",
+  "prefix":"BOT PREFIX",
+  "embC":"EMBED COLOR",
+  "embT":"EMBED TITLE",
+  "embDesc":"EMBED DESCRIPTION",
+  "embF":"EMBED FOOTER",
+  "errC":"ERROR COLOR",
+  "errT":"ERROR TITLE"
+}
